@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Messaging</title>
+    <script>
+        document.addEventListener('DOMContentLoaded', function()
+        {
+            if (!localStorage.getItem('user'))
+            {
+                var user = prompt("Display Name?");
+            }
+            else
+            {
+                var user = localStorage.getItem('user');
+            }
+
+            if (user === null || user === '')
+                {
+                document.getElementById("message").innerHTML = "No Display Name chosen."
+                }
+            else
+                {
+                localStorage.setItem('user', user);
+                document.getElementById("header").innerHTML = `Hello, ${user}!`;
+                document.getElementById("create_channel").disabled = false;
+                }
+        });
+        function create_channel()
+        {
+            alert("Test");
+        }
+    </script>
+</head>
+<body>
+    <h1 id="header"></h1>
+    <p id="message"></p>
+    <button id="create_channel" onclick="create_channel()" disabled>Create Channel</button>
+</body>
+</html>
