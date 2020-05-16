@@ -10,4 +10,4 @@ socket_io = SocketIO(app)
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    return render_template("sidebar.html", title_label="Test", button_label="Test")

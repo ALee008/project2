@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- Icons -->
+    <script src="https://kit.fontawesome.com/5ce9145ec9.js" crossorigin="anonymous"></script>
+    <!-- CSS only -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/sidebar.css">
+
+  <!-- Modal -->
+  <!-- JS, Popper.js, and jQuery-->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+  <script>
+    function add_channel()
+    {
+      var channels = []
+      document.querySelectorAll('.nav-link.my_channels > .name').forEach(item => {
+        channels[channels.length] = item.innerHTML;
+      });
+
+      var value = document.querySelector('#my_channel_name').value;
+      // Check if channel name already exists
+      if (!channels.includes(value))
+      {
+        var template = document.querySelector("#modal_template");
+        var clone = template.content.cloneNode(true);
+        clone.querySelector(".name").innerHTML = value;
+
+        // Add new item to list
+        document.querySelector('#my_channels').appendChild(clone);
+      }
+      document.querySelector('#my_channel_name').value = '';
+      // Stop form from submitting
+      return false;
+    }
+  </script>
+  <template id="modal_template">
+    <li class="nav-item">
+      <a class="nav-link my_channels" href="#">
+        <span class="fab fa-slack-hash"></span>
+        <span class="name"></span>
+      </a>
+    </li>
+  </template>
+</head>
+<body>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Create Channel</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="input-group mb-3">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="addon-wrapping">#</span>
+          </div>
+          <input id="my_channel_name" type="text" class="form-control" placeholder="channel name" aria-label="channel name"
+                 aria-describedby="button-addon2" required>
+          <div class="input-group-append">
+            <button class="btn btn-outline-secondary" type="button" id="button-addon2" data-dismiss="modal" onclick="add_channel()">Create
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Navigation Bar -->
+<nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="#">Welcome </a>
+      <input class="form-control form-control-dark w-100" type="text" placeholder="Search" aria-label="Search">
+      <ul class="navbar-nav px-3">
+        <li class="nav-item text-nowrap">
+          <a class="nav-link" href="#">Sign out</a>
+        </li>
+      </ul>
+    </nav>
+
+<div class="container-fluid">
+      <div class="row">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+          <div class="sidebar-sticky">
+            <ul id="my_channels" class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#">
+                  <span class="fas fa-cloud"></span>
+                  Welcome <span class="sr-only">(current)</span>
+                </a>
+              </li>
+              <li class="nav-item">
+                <button class="nav-link border-bottom" data-toggle="modal" data-target="#exampleModal" href="#">
+                  <span class="fas fa-plus-circle"></span>
+                  Create Channel
+                </button>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link my_channels" href="#">
+                  <span class="fab fa-slack-hash"></span>
+                  <span class="name">Test Channel</span>
+                </a>
+              </li>
+
+            </ul>
+
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Saved reports</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+                <span class="fas fa-plus-circle"></span>
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Current month
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Last quarter
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Social engagement
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Year-end sale
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+            <h1 class="h2">Dashboard</h1>
+            <div class="btn-toolbar mb-2 mb-md-0">
+              <div class="btn-group mr-2">
+                <button class="btn btn-sm btn-outline-secondary">Share</button>
+                <button class="btn btn-sm btn-outline-secondary">Export</button>
+              </div>
+              <button class="btn btn-sm btn-outline-secondary dropdown-toggle">
+                <span data-feather="calendar"></span>
+                This week
+              </button>
+            </div>
+          </div>
+
+          <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+
+
+        </main>
+      </div>
+    </div>
+</body>
+</html>
